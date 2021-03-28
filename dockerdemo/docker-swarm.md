@@ -1,5 +1,10 @@
 # Initialise Docker Swarm
 `docker swarm init --advertise-addr <IP Address>`
+This command will generate a join command similar to below
+
+
+# Add Worker to Docker Swarm
+`docker swarm join --token <generated_Token <IP Address>:2377`
 
 # List Nodes
 `docker node ls`
