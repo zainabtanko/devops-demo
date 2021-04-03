@@ -1,4 +1,6 @@
-# Kubernetes installation on Ubuntu
+# _Kubernetes installation on Ubuntu_
+
+# On master Machine and All worker nodes
 ## Install Docker
 *As Root*
 ``` bash linenums="1"
@@ -28,13 +30,14 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
-
+# On Master machine
 ## Initiate cluster
 *As Root*
 ``` bash
 kubeadm init --apiserver-advertise-address=172.31.15.121 --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=Mem,NumCPU
-
-kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
+```
+Preserve the  `Kubeadm Join` command. example
+```kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
     --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
 ```
 
@@ -47,4 +50,13 @@ source ~/.bashrc
 ## Install network
 ``` bash
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
+
+# On All Worker Nodes
+# On Master machine
+## Initiate cluster
+*As Root*
+``` bash
+kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
+    --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
 ```
