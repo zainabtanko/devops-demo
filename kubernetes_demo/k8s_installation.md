@@ -41,7 +41,7 @@ kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
 ## Enable AutoCompletion (Optional)
 ``` bash
 echo 'source <(kubectl completion bash)' >>~/.bashrc
-source ~/.bash
+source ~/.bashrc
 ```
 
 ## Install network
