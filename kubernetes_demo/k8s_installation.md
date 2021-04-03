@@ -53,8 +53,7 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 
 # On All Worker Nodes
-# On Master machine
-## Initiate cluster
+## Join cluster
 *As Root*
 ``` bash
 kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
