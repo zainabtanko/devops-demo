@@ -38,6 +38,12 @@ kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
     --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
 ```
 
+## Enable AutoCompletion (Optional)
+``` bash
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+source ~/.bash
+```
+
 ## Install network
 ``` bash
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
