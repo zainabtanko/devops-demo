@@ -5,3 +5,11 @@ file {'/tmp/fileContainingVariableText':
   ensure  => file,
   content => ${content},
 }
+```
+# Factor variables:
+``` rb
+notify { 'OS Family':
+ message => $facts['os']['family']
+}
+
+```
