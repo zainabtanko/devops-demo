@@ -26,6 +26,14 @@ service { 'apache2':
   subscribe => Package['apache2'],
 }
 ```
+
+4. Notify
+``` rb
+notify { 'Debug Message':
+  message  => "hello",
+}
+```
+
 ## Classes
 webserver.pp
 ``` rb
