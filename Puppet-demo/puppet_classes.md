@@ -29,15 +29,12 @@ class user_account ($username){
 
 }
 
-node 'PuppetAgent1' {
-  class {user_account:
+class {user_account:
     username => "homer",
-  }
 }
 
-node 'PuppetAgent2' {
-  class {user_account:
-    username => "bart",
-  }
-}
+#Or
+#class {user_account:
+#    username => "bart",
+#}
 ```
