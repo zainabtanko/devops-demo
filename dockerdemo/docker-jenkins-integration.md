@@ -7,7 +7,7 @@ Add below lines to sudoers file
 ```
 ALL     ALL=(ALL:ALL) ALL
 
-jenkins ALL = NOPASSWD: /usr/bin/docker
+jenkins   ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 
@@ -17,7 +17,7 @@ jenkins ALL = NOPASSWD: /usr/bin/docker
 * Execute shell :
 ``` mvn package
     cp <path_to_generated_addressbook.war_From above command> .
-    echo "FROM tomcat" > Dockerfile
-    ADD "addressbook.war /usr/local/tomcat/webapps/addresssbook.war" >> Dockerfile
+    echo "FROM bitnami/tomcat" > Dockerfile
+    echo COPY addressbook.war /opt/bitnami/tomcat/webapps_default/addresssbook.war >> Dockerfile
     docker build -t addressbook:${BUILD_NUMBER} .
  ```
