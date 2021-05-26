@@ -1,7 +1,8 @@
 # Generate addressbook.war
 ``` bash
-apt-get install maven
-git clone
+apt-get update
+apt-get install -y maven openjdk-8-jdk
+git clone https://github.com/amitkumar2283/addressbook
 cd addressbook
 mvn package
 ```
@@ -10,25 +11,33 @@ mvn package
 ``` bash
 cd  /etc/puppetlabs/code/environments/production/modules
 puppet module install puppetlabs-tomcat
-cp /root/addressbook/addressbook_main/target/addressbook.war /etc/puppetlabs/code/environments/production/modules/tomcat/files
-
 ```
 
-# setup instance
+# Copy over the generated WAR file to tomcat module's `files` folder
+``` bash
+mkdir -p /etc/puppetlabs/code/environments/production/modules/tomcat/files
+cp /root/addressbook/addressbook_main/target/addressbook.war /etc/puppetlabs/code/environments/production/modules/tomcat/files
+```
+
+# Write Your manifest
 
 ``` rb
-tomcat::install { '/opt/tomcat9':
-  source_url => 'https://www.apache.org/dist/tomcat/tomcat-9/v9.0.44/bin/apache-tomcat-9.0.44.tar.gz'
+# Install java
+class { 'java' :
+  package => 'openjdk-8-jdk',
+}
+
+# Install tomcat9 server
+tomcat::install { '/opt/tomcat':
+  source_url => 'https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz',
 }
 tomcat::instance { 'default':
-  catalina_home => '/opt/tomcat9',
+  catalina_home => '/opt/tomcat',
 }
-```
 
-# deploy war file
-```rb
-tomcat::war { 'sample.war':
-  catalina_base => '/opt/tomcat9',
+# Deploy WAR file
+tomcat::war { 'addressbook.war':
+  catalina_base => '/opt/tomcat',
   war_source    => "puppet:///modules/tomcat/addressbook.war",
 }
 ```
