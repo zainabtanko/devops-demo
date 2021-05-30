@@ -36,6 +36,11 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ``` bash
 kubeadm init --apiserver-advertise-address=172.31.15.121 --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=Mem,NumCPU
 ```
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
 Preserve the  `Kubeadm Join` command. example
 ```kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
     --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
