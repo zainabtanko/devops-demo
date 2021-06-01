@@ -28,6 +28,7 @@ sudo htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
 start apache
 ``` bash
 systemctl restart apache2.service
+systemctl restart nagios.service
 ```
 
 nagios should be avialable at http:/\<ip address>/nagios
