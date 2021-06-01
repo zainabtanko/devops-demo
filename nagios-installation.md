@@ -1,4 +1,4 @@
-## Install nagios Core
+## Install nagios Core on Ubuntu
 ``` bash
 apt-get update && apt-get install -y autoconf gcc libc6 make wget unzip apache2 php libapache2-mod-php7.4 libgd-dev autoconf gcc libc6 libmcrypt-dev make libssl-dev wget bc gawk dc build-essential snmp libnet-snmp-perl gettext
 cd /tmp
