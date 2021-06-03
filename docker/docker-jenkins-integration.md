@@ -8,7 +8,7 @@ _if this is on master, then grant sudo access to Jenkins user_
 _if this is on node, grand sudo access for the user which is used to connect to the node in node configuration_
 
 
-## Add below lines to sudoers file
+## Execute below command
    ```bash
    sudo echo "jenkins   ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
    ```
