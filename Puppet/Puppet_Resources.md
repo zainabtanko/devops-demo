@@ -1,6 +1,6 @@
-# Puppet resources
+# Manifest
 
-## Resource
+# Resource
 1. File
 ``` rb
 file { 'helloworld':
@@ -28,25 +28,25 @@ service { 'apache2':
 ```
 
 4. Notify
-``` rb
+```rb
 notify { 'Debug Message':
   message  => "hello",
 }
 ```
 
-## Classes
-webserver.pp
+# Variables
+## Custom Variables
 ``` rb
-class webserver {
- package { 'apache2':
-  ensure => installed,
- }
- service { 'apache2':
-  ensure    => running,
- }
+$content = "This content is defined in a variable"
+file {'/tmp/fileContainingVariableText':
+  ensure  => file,
+  content => ${content},
 }
 ```
+## Factor variables
+``` rb
+notify { 'OS Family':
+ message => $facts['os']['family']
+}
 
-In site.pp
-
-```include webserver```
+```
