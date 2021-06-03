@@ -1,23 +1,23 @@
+# Install docker in one of the jenkins nodes (master or slave or any other node)
+
 # Enable jenkins to run sudo commands without password
+_This should be done on the node where you want to run a docker build_
 
-Add below lines to sudoers file
+_if this is on master, then grant sudo access to Jenkins user_
 
-`$ sudo visudo`
-
-```
-ALL     ALL=(ALL:ALL) ALL
-
-jenkins   ALL=(ALL:ALL) NOPASSWD:ALL
-```
+_if this is on node, grand sudo access for the user which is used to connect to the node in node configuration_
 
 
+## Add below lines to sudoers file
+   ```bash
+   sudo echo "jenkins   ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+   ```
 
 
 # Jenkins Freestyle job to create docker iamge
-* Execute shell :
-``` mvn package
-    cp <path_to_generated_addressbook.war_From above command> .
-    echo "FROM bitnami/tomcat" > Dockerfile
-    echo COPY addressbook.war /opt/bitnami/tomcat/webapps_default/addresssbook.war >> Dockerfile
-    docker build -t addressbook:${BUILD_NUMBER} .
- ```
+* Add the below commands to `Execute shell` build step :
+  ```bash
+   mvn package # this will generate the war file
+   cp addressbook_main/target/addressbook.war . # this will copy the war file to build context (current dir)
+   sudo docker build -t addressbook:$BUILD_NUMBER . # build the iamge
+   ```

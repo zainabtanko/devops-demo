@@ -1,22 +1,49 @@
-# Initialise Docker Swarm
-`docker swarm init --advertise-addr <IP Address>`
+## Initialise Docker Swarm
+
+````
+docker swarm init --advertise-addr <IP Address>
+````
 This command will generate a join command similar to below
 
 
-# Add Worker to Docker Swarm
-`docker swarm join --token <generated_Token <IP Address>:2377`
+## Add Worker to Docker Swarm
 
-# List Nodes
-`docker node ls`
+````
+docker swarm join --token <generated_Token <IP Address>:2377
+````
 
-# Create Service
-`docker service create –name Apache2 –mode global -d -p 8003:80 httpd`
+## List Nodes
 
-# List services
-`Docker service ls`
+````
+docker node ls
+````
 
-# scale services
-`docker service scale Apache2=5`
+## Create Service
 
-# Check docker containers in a service
-`docker service ps mysql`
+````
+docker service create –name Apache2 –mode global -d -p 8003:80 httpd
+````
+
+## List services
+
+````
+Docker service ls
+````
+
+## scale services
+Create a replicated service
+````
+docker service create –name Apache2 –mode replicated -d -p 8003:80 httpd
+````
+
+Scale the service
+
+````
+docker service scale Apache2=5
+````
+
+## Check docker containers in a service
+
+````
+docker service ps mysql
+````
