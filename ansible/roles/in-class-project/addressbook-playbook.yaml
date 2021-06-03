@@ -39,10 +39,9 @@
     - name: Update apt and install Java
       apt: update_cache=yes name=openjdk-8-jdk state=latest
     - name: Build WAR file
-      command: chdir="{{ projectDir }}" && mvn package
+      command: chdir="{{ projectDir }}" mvn package
     - name: Copy Generated WAR file
-      copy:
-       command: cp "{{ projectDir }}/{{ warPath }}" "{{ projectDir }}"
+      command: cp "{{ projectDir }}/{{ warPath }}" "{{ projectDir }}"
     - name: Build Docker Image
       command: chdir="{{ projectDir }}" docker build . -t "{{ generatedImageName }}"
     - name: Run Docker Container
