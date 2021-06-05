@@ -11,6 +11,14 @@
     state: present
     notify:
     - run update
+  - name: create users
+            loop:
+                    - user1
+                    - user2
+                    - user3
+            user:
+                    name: "{{ item }}"
+                    state: present
   - name: install vim
     apt:
     pkg: vim
