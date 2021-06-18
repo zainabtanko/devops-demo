@@ -1,4 +1,4 @@
-# Installing Jenkins
+# Installing Jenkins on Ubuntu
 
 ## Install Java
 ````bash
