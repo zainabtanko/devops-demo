@@ -42,8 +42,9 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 Preserve the  `Kubeadm Join` command. example
-```kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
-    --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
+```
+kubeadm join <masterIP>:6443 --token <some-token> \
+    --discovery-token-ca-cert-hash <some-generated token>
 ```
 
 ## Enable AutoCompletion (Optional)
@@ -59,11 +60,17 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # On All Worker Nodes
 ## Join cluster
-*As Root*
+*As Root* run the join command generated during kubeadm init
 ``` bash
-kubeadm join 10.128.0.22:6443 --token sdcr7n.0wrfcfpod2xvqnf3 \
-    --discovery-token-ca-cert-hash sha256:562a240ede849125411def27140718e25f637071abba671823eeb1dff06b7b92
+kubeadm join <masterIP>:6443 --token <some-token> \
+    --discovery-token-ca-cert-hash <some-generated token>
 ```
+
+Note: if you forget/misplace the join command, retrieve it from the master machine
+```
+kubeadm token create --print-join-command
+```
+
 ## Verify the nodes on the Master
 ```
 kubectl get nodes
